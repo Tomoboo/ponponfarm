@@ -21,6 +21,7 @@ public class Info_Nasubi : Info_Monsters
     // Update is called once per frame
     protected override void Update()
     {
+        int NowPercent = 50;
         //////////////////// //Nasubi_infoの育成時間と元気度ゲージ///////////////////////
         Monster = GameObject.Find("Nasubi");
         if (Monster != null)
@@ -53,10 +54,10 @@ public class Info_Nasubi : Info_Monsters
                 Debug.Log("nowGauge" + nowGauge);
                 valuetext.text = nowGauge.ToString("00") + "<color=#b3bedb>/</color>" + maxGauge.ToString("000");
 
-                if (EneGauge.value >= 50)
-                    Enepower_flg = true; //元気ゲージが50％以上の時
+                if (EneGauge.value >= NowPercent)
+                    Enepower_flg = true; //元気ゲージがNowPercent以上の時
                 else
-                    Enepower_flg = false;//元気ゲージが50％以下の時
+                    Enepower_flg = false;//元気ゲージがNowPercent以下の時
 
             }
         }

@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class GameDirector : MonoBehaviour
 {
+    
     [SerializeField] GameObject NasubiPrefab;
     [SerializeField] GameObject OrangePrefab;
     [System.NonSerialized] public GameObject Lock_item1;
@@ -15,6 +13,10 @@ public class GameDirector : MonoBehaviour
     TextMeshProUGUI coin_text;
     TextMeshProUGUI kansha_text;
     //BuyMonster buyMonster;
+    public Transform parentTran;
+    public int HoldCoin = 0;
+    public int pick_monster = -1;
+    [Header("感謝の涙")] public int kanshanonamida = 0;
     private GameObject coin;
     private GameObject kansha;
     private GameObject Ms1;
@@ -22,11 +24,10 @@ public class GameDirector : MonoBehaviour
     private GameObject MsScreen2;
     private GameObject MsScreen3;
     private GameObject ItemScreen;
-    public Transform parentTran;
-    public int HoldCoin = 0;
-    public int pick_monster = -1;
-    [Header("感謝の涙")] public int kanshanonamida = 0;
-
+    private GameObject Nasubi;
+    private GameObject Notice_nasubi;
+    private GameObject Orange;
+    private GameObject Notice_orange;
     void Start()
     {
         coin = GameObject.Find("StatusBar_Group_Light_GrayButton").transform.Find("Status_Coin").gameObject;
@@ -54,6 +55,7 @@ public class GameDirector : MonoBehaviour
 
     public void kanshaGet()
     {
+        Debug.Log("感謝の涙ゲット");
         kanshanonamida += 1;
     }
 
@@ -72,7 +74,7 @@ public class GameDirector : MonoBehaviour
         Debug.Log("育成 Complete");
         switch (num)
         { 
-           
+            
             case 0:  //Nasubi
                 Debug.Log("nasubi Farm Complete");
                 HoldCoin += 3000;
@@ -95,7 +97,20 @@ public class GameDirector : MonoBehaviour
         coin_text.text = HoldCoin.ToString();
         Debug.Log("CoinGet");
     }
-
+#pragma warning disable IDE0060 // 未使用のパラメーターを削除します
+    private void Instantiate_Monster(GameObject monster, GameObject monster_prefab, GameObject notice_obj, string notice_obj_name)
+#pragma warning restore IDE0060 // 未使用のパラメーターを削除します
+    {
+        MsScreen1.SetActive(false);
+        monster = Instantiate(monster_prefab);
+        monster.name = monster_prefab.name;
+        monster.transform.SetParent(parentTran);
+        monster.transform.localPosition = new Vector3(30, -111, 0);
+        monster.transform.localScale = new Vector3(1, 1, 1);
+        monster.transform.SetAsLastSibling();
+        notice_obj = GameObject.Find(notice_obj_name);
+        Destroy(notice_obj);
+    }
     public void Paynow()
     {
         if (GameObject.Find("Notice_Nasubi") != null)
@@ -108,26 +123,10 @@ public class GameDirector : MonoBehaviour
         switch (pick_monster)
         {
             case 0: //Nasubi
-                MsScreen1.SetActive(false);
-                GameObject Nasubi = Instantiate(NasubiPrefab);
-                Nasubi.name = NasubiPrefab.name;
-                Nasubi.transform.SetParent(parentTran);
-                Nasubi.transform.localPosition = new Vector3(30, -111, 0);
-                Nasubi.transform.localScale = new Vector3(1, 1, 1);
-                Nasubi.transform.SetAsLastSibling();
-                GameObject Notice_nasubi = GameObject.Find("Notice_Nasubi");
-                Destroy(Notice_nasubi);
+                Instantiate_Monster(Nasubi, NasubiPrefab, Notice_nasubi, "Notice_Nasubi");
                 break;
             case 1: //Orange
-                MsScreen1.SetActive(false);
-                GameObject Orange = Instantiate(OrangePrefab);
-                Orange.name = OrangePrefab.name;
-                Orange.transform.SetParent(parentTran);
-                Orange.transform.localPosition = new Vector3(30, -111, 0);
-                Orange.transform.localScale = new Vector3(1, 1, 1);
-                Orange.transform.SetAsLastSibling();
-                GameObject Notice_orange = GameObject.Find("Notice_Orange");
-                Destroy(Notice_orange);
+                Instantiate_Monster(Orange, OrangePrefab, Notice_orange, "Notice_Orange");
                 break;
         }
     }

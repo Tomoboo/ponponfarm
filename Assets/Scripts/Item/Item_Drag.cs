@@ -6,74 +6,72 @@ using UnityEngine.EventSystems;
 
 public class Item_Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    [System.NonSerialized] public Transform parenTran;
     GameObject gameDirector;
     GameObject ItemCanvas;
     GameObject draggingObj;
+    GameObject DropArea;
     private RectTransform prePos1;
     private Vector3 preposition;
-    public Transform parenTran;
     Vector2 localpoint;
+    Vector3[] corners;
     Camera UIcamera;
     Color color;
 
     void Awake()
     {
+        UIcamera = GameObject.Find("UI Camera").GetComponent<Camera>();
+        DropArea = GameObject.Find("ItemDropAreas");
         ItemCanvas = GameObject.Find("FarmItemScene");
         gameDirector = GameObject.Find("GameDirector");
-        UIcamera = GameObject.Find("UI Camera").GetComponent<Camera>();
-        preposition =  new Vector3(0.09f, -0.38f, 0);
         this.color = gameObject.GetComponent<Image>().color;
+
+        var rectTransform = DropArea.GetComponent<RectTransform>();
+        //　ローカル空間におけるRectTransformの長方形の角の座標を取得
+        //　返される4つの頂点は時計回りに「左下、左上、右上、右下」
+        corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+
+        for (var i = 0; i < corners.Length; i++)
+        {
+            Debug.Log($"Local Corners[{i}] : {corners[i]}");
+        }
+    }
+
+    private GameObject Instatiate_item(GameObject drag_obj, string item_name, string item_tag_name)
+    {
+        //アイテムのイメージを複製
+        drag_obj = Instantiate(gameObject, parenTran);
+        drag_obj.name = item_name;
+        //複製したアイテムにタグを追加
+        drag_obj.tag = item_tag_name;
+        return drag_obj;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        GameObject draggingObj1; 
-        GameObject draggingObj2;
-        GameObject draggingObj3;
-        GameObject draggingObj4;
         parenTran = transform.parent;
-
         //オブジェクトの前面にある障害を取り除く
         gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
         if (transform.parent.name == "item1Parent")
         {
-            //アイテムのイメージを複製
-            draggingObj1 = Instantiate(gameObject, parenTran);
-            draggingObj1.name = "SpawnItem1";
-            //複製したアイテムにタグを追加
-            draggingObj1.tag = "item1";
             //グローバル変数に代入
-            draggingObj = draggingObj1;
+            draggingObj = Instatiate_item(draggingObj, "SpawnItem1", "item1");
         }
         else if (transform.parent.name == "item2Parent")
         {
-            //アイテムのイメージを複製
-            draggingObj2 = Instantiate(gameObject, parenTran);
-            draggingObj2.name = "SpawnItem2";
-            //複製したアイテムにタグを追加
-            draggingObj2.tag = "item2";
             //グローバル変数に代入
-            draggingObj = draggingObj2;
+            draggingObj = Instatiate_item(draggingObj, "SpawnItem2", "item2");
         }
         else if (transform.parent.name == "item3Parent")
         {
-            //アイテムのイメージを複製
-            draggingObj3 = Instantiate(gameObject, parenTran);
-            draggingObj3.name = "SpawnItem3";
-            //複製したアイテムにタグを追加
-            draggingObj3.tag = "item3";
             //グローバル変数に代入
-            draggingObj = draggingObj3;
+            draggingObj = Instatiate_item(draggingObj, "SpawnItem3", "item3");
         }
         else if (transform.parent.name == "item4Parent")
         {
-            //アイテムのイメージを複製
-            draggingObj4 = Instantiate(gameObject, parenTran);
-            draggingObj4.name = "SpawnItem4";
-            //複製したアイテムにタグを追加
-            draggingObj4.tag = "item4";
             //グローバル変数に代入
-            draggingObj = draggingObj4;
+            draggingObj = Instatiate_item(draggingObj, "SpawnItem4", "item4");
         }
         //複製を最前面に配置
         draggingObj.transform.SetAsFirstSibling();
@@ -94,12 +92,13 @@ public class Item_Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void OnDrag(PointerEventData eventData)
     {
         //ドラッグ中は位置を更新する
-        draggingObj.GetComponent<RectTransform>().localPosition = GetLocalPosition(((PointerEventData)eventData).position, this.transform);
-       Debug.Log("(x ,y ,z ) = " + draggingObj.transform.position);
+        draggingObj.GetComponent<RectTransform>().localPosition = GetLocalPosition(eventData.position, this.transform);
+        Debug.Log("(x ,y ,z ) = " + draggingObj.transform.position);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        int index = 0;
         bool ishit = true;
 
         var raycastResults = new List<RaycastResult>();
@@ -117,13 +116,43 @@ public class Item_Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             GameObject dropArea = GameObject.Find("ItemDropAreas");
             parenTran = dropArea.transform;
-            draggingObj.transform.position = preposition;
+            Vector3 worldpos = draggingObj.transform.position;
+            float diff = 0.5f;
+            if ((worldpos.x > corners[2].x) && (worldpos.y > corners[3].y)) //四隅の右横
+            {
+                worldpos.x = corners[2].x - diff;
+                draggingObj.transform.position = worldpos;
+            }
+            else if (worldpos.y > corners[2].y) //四隅の上部
+            {
+                if (worldpos.x > 0)
+                    worldpos.x -= diff;
+                else
+                    worldpos.x += diff;
+                worldpos.y = corners[1].y - diff;
+                draggingObj.transform.position = worldpos;
+            }
+            else if ((worldpos.x < corners[0].x) && (worldpos.y > corners[0].y)) //四隅の左横
+            {
+                worldpos.x = corners[0].x + diff;
+                draggingObj.transform.position = worldpos;
+            }
+            else if (worldpos.y < corners[0].y) //四隅の下部
+            {
+                if (worldpos.x > 0)
+                    worldpos.x -= diff;
+                else
+                    worldpos.x += diff;
+                worldpos.y = corners[0].y + diff;
+                draggingObj.transform.position = worldpos;
+            }
             var localpos = draggingObj.transform.localPosition;
             localpos.z = 0;
             draggingObj.transform.localPosition = localpos;
         }
 
         draggingObj.transform.SetParent(parenTran);
+        draggingObj.transform.SetSiblingIndex(index);
         draggingObj.AddComponent<BoxCollider2D>();
         /////////////////////////////再度ロックする//////////////////////////////////////
         if (gameDirector.GetComponent<GameDirector>().Lock_item1.activeSelf == false)
@@ -141,6 +170,7 @@ public class Item_Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         gameObject.GetComponent<Image>().color = this.color;
         //オブジェクトの前面にある障害を元に戻す
         gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
     }
 
 

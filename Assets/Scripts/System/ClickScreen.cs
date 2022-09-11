@@ -9,14 +9,14 @@ public class ClickScreen : MonoBehaviour
     private GameObject MsScreen2;
     private GameObject MsScreen3;
     private GameObject ItemScreen;
-    [SerializeField] private GameObject Ms_Prefab;
+    [SerializeField] GameObject notice_info;
 
     void Awake()
     {
-        this.MsScreen1 = GameObject.Find("UICanvas").transform.Find("MonsterScreen").gameObject;
-        this.MsScreen2 = GameObject.Find("UICanvas").transform.Find("MonsterScreen – 1").gameObject;
-        this.MsScreen3 = GameObject.Find("UICanvas").transform.Find("MonsterScreen – 2").gameObject;
-        this.ItemScreen = GameObject.Find("UICanvas").transform.Find("FarmItemScene").gameObject;
+        MsScreen1 = GameObject.Find("UICanvas").transform.Find("MonsterScreen").gameObject;
+        MsScreen2 = GameObject.Find("UICanvas").transform.Find("MonsterScreen – 1").gameObject;
+        MsScreen3 = GameObject.Find("UICanvas").transform.Find("MonsterScreen – 2").gameObject;
+        ItemScreen = GameObject.Find("UICanvas").transform.Find("FarmItemScene").gameObject;
         //Resources.Load("Monster1_info") as GameObject;
     }
 
@@ -29,20 +29,17 @@ public class ClickScreen : MonoBehaviour
 
         entry.callback.AddListener((x) =>
         {
-            if (this.MsScreen1.activeSelf == true)
+            if (MsScreen1.activeSelf == true)
                 S_Trigger1();
 
-            if (this.MsScreen2.activeSelf == true)
+            if (MsScreen2.activeSelf == true)
                 S_Trigger2();
 
-            if (this.MsScreen3.activeSelf == true)
+            if (MsScreen3.activeSelf == true)
                 S_Trigger3();
-
-            if(this.Ms_Prefab != null)
+         
+            if (ItemScreen.activeSelf == true)
                 S_Trigger4();
-
-            if (this.ItemScreen.activeSelf == true)
-                S_Trigger5();
         });
 
         //イベントの設定をEventTriggerに反映
@@ -51,27 +48,22 @@ public class ClickScreen : MonoBehaviour
 
     private void S_Trigger1()
     {
-        this.MsScreen1.SetActive(false);
+        MsScreen1.SetActive(false);
     }
 
     private void S_Trigger2()
     {
-        this.MsScreen2.SetActive(false);
+        MsScreen2.SetActive(false);
     }
 
     private void S_Trigger3()
     {
-        this.MsScreen3.SetActive(false);
+        MsScreen3.SetActive(false);
     }
 
     private void S_Trigger4()
     {
-        Ms_Prefab.GetComponent<Info_AnimateDialog>().Close();
-    }
-
-    private void S_Trigger5()
-    {
-        this.ItemScreen.SetActive(false);
+        ItemScreen.SetActive(false);
     }
 
 

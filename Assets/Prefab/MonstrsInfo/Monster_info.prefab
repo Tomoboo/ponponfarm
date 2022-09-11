@@ -89,7 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05be1a489b427548bbb06fc75e3ef18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ms1_infoPrefab: {fileID: 2813800812519651751}
+  Ms_prefab: {fileID: 0}
+  notice_info: {fileID: 0}
 --- !u!1 &2813800812519651751
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +104,7 @@ GameObject:
   - component: {fileID: 4385000402171844181}
   m_Layer: 5
   m_Name: Monster_info
-  m_TagString: Monster_info1
+  m_TagString: Monster_Info
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

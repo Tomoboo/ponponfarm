@@ -4,13 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Monster_info1
   - item1
   - item2
   - item3
   - item4
   - ItemdropArea
   - Ban
+  - Monster_Info
   layers:
   - Default
   - TransparentFX

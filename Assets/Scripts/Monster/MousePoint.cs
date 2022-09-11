@@ -12,6 +12,8 @@ public class MousePoint : MonoBehaviour
     void Awake()
     {
         UIcamera = GameObject.Find("UI Camera").GetComponent<Camera>();
+        Vector2 pos = new(0,5);
+        transform.position = pos;
     }
     void Update()
     {

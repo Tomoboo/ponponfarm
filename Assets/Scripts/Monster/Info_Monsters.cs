@@ -35,6 +35,7 @@ public class Info_Monsters : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        int NowPercent = 50; 
         //////////////////// //Monster_infoの育成時間と元気度ゲージ///////////////////////
          Monster = GameObject.Find("Monster");
         if (Monster != null) { 
@@ -55,7 +56,6 @@ public class Info_Monsters : MonoBehaviour
                 /////////////////////////////EneGauge/////////////////////////////
                 EneGauge = Msfram.transform.Find("EnergyGauge").GetComponent<Slider>();
                 valuetext = EneGauge.transform.Find("Text_Value").GetComponent<TextMeshProUGUI>();
-                //decrease_flg = Monster.GetComponent<Rare1MonsterController>().decrease_flg;
 
                 //スライダーの最大値の設定
                 EneGauge.maxValue = maxGauge;
@@ -66,7 +66,7 @@ public class Info_Monsters : MonoBehaviour
                 Debug.Log("nowGauge" + nowGauge);
                 valuetext.text = nowGauge.ToString("00") + "<color=#b3bedb>/</color>" + maxGauge.ToString("000");
                 //※モンスター共通
-                if (EneGauge.value >= 50)
+                if (EneGauge.value >= NowPercent)
                     Enepower_flg = true; //元気ゲージが50％以上の時
                 else
                     Enepower_flg = false;//元気ゲージが50％以下の時

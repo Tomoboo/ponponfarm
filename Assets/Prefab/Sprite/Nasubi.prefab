@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 2942194934490829297}
   - component: {fileID: 2942194934490829296}
   - component: {fileID: 7504466152045374671}
-  - component: {fileID: 1961593435894534666}
+  - component: {fileID: 5817113850314046698}
+  - component: {fileID: -8371223908510097564}
   m_Layer: 5
   m_Name: Nasubi
   m_TagString: Untagged
@@ -74,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1194928465
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9c414769e11061c4e9eac0a743c55104, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -128,16 +129,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fc213275f3f85438d59960db15f2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rate: 2
+  Stoprate: 20
+  Sleeprate: 70
   dropprate: 1
-  span: 10
+  flipTime: 100
+  span: 40
+  limitStop: 10
+  limitSleep: 5
   item3speed: 0
-  speed: 75
+  speed: 20
   isTouch: 0
   second: 0
   minute: 0
   hour: 0
---- !u!114 &1961593435894534666
+--- !u!114 &5817113850314046698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,3 +157,16 @@ MonoBehaviour:
   Ms_infoPrefab: {fileID: 2813800812519651751, guid: 06f903684bdc189479274474c972c5f4, type: 3}
   _animator: {fileID: 6019472191751559036, guid: 06f903684bdc189479274474c972c5f4, type: 3}
   _layer: 0
+--- !u!114 &-8371223908510097564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942194934490829306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785a525e4b4792a4188f11accd29fdc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parenTran: {fileID: 0}

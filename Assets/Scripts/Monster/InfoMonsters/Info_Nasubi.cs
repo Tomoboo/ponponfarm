@@ -35,12 +35,7 @@ public class Info_Nasubi : Info_Monsters
             {
                 //TimerText & EneGaugeの親オブジェクト
                 GameObject Msfram = Monster_infoPrefab.transform.Find("Monster_Fram").gameObject;
-                /////////////////////////// //TimerText////////////////////////////
-                /*timerText = Msfram.transform.Find("Text_Time").GetComponent<TextMeshProUGUI>();
-                timerText.text =
-                    hour.ToString("00") + "時間" + minute.ToString("00") + "分" +
-                      ((int)second).ToString("00") + "秒";*/
-                /////////////////////////////EneGauge/////////////////////////////
+                
                 EneGauge = Msfram.transform.Find("EnergyGauge").GetComponent<Slider>();
                 valuetext = EneGauge.transform.Find("Text_Value").GetComponent<TextMeshProUGUI>();
                 //decrease_flg = Monster.GetComponent<Nasubi>().decrease_flg;

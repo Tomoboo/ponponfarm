@@ -9,7 +9,7 @@ namespace Monster
 {
     public class MonsterController : MonoBehaviour
     {
-        
+        protected monster_type type;
         [SerializeField] protected int Moverate = 8;
         [SerializeField] protected float Stoprate = 4;
         [SerializeField] protected float Sleeprate = 2;
@@ -36,7 +36,6 @@ namespace Monster
         protected float stopTimer = 0;
         protected float sleepTimer = 0;
         protected float diagonaltimer = 0;
-        protected float item1start = 0, item2start = 0, item3start = 0, item4start = 0;
         protected int num = -1;
         protected int monster_num = -1;
         protected int col_size = 0;
@@ -55,6 +54,7 @@ namespace Monster
 
         protected virtual void Start()
         {
+            type = monster_type.num;
             span = 8.0f;
             col_size = 6;
             monster_num = -1;
@@ -103,7 +103,7 @@ namespace Monster
             {
                 Complete_flg = true;
                 // モンスターごとに引数設定
-                director.GetComponent<GameDirector>().FarmComplete(monster_num);
+                director.GetComponent<GameDirector>().FarmComplete(type);
                 // ランダム確率で感謝の涙GET
                 if (Random.Range(0, 60) < dropprate)
                     director.GetComponent<GameDirector>().kanshaGet();
@@ -131,7 +131,7 @@ namespace Monster
         /// <returns></returns>
         protected bool GetJudge(bool key, bool value, float rate)
         {
-            if ((Random.Range(0, 100) < rate) && (key == false)&& detectCollider.isTouch == false && isMove == false &&
+            if ((Random.Range(0, 100) < rate) && (key == false) && detectCollider.isTouch == false && isMove == false &&
                 (GameObject.FindWithTag("item1") == null) && (GameObject.FindWithTag("item2") == null) &&
                (GameObject.FindWithTag("item3") == null) && (GameObject.FindWithTag("item4") == null))
             {
@@ -146,7 +146,7 @@ namespace Monster
             isStop = GetJudge(isSleep, isStop, Stoprate);
             if (isStop == true)
             {
-                Debug.Log("モンスタが止まっている" + stopTimer);
+                //Debug.Log("モンスタが止まっている" + stopTimer);
                 stopTimer += Time.deltaTime;
                 if (stopTimer > limitStop)
                     isStop = false;
@@ -157,7 +157,7 @@ namespace Monster
             isSleep = GetJudge(isStop, isSleep, Sleeprate);
             if (isSleep == true)
             {
-                Debug.Log("モンスタが寝ている" + sleepTimer);
+                //Debug.Log("モンスタが寝ている" + sleepTimer);
                 sleepTimer += Time.deltaTime;
                 if (sleepTimer > limitSleep)
                     isSleep = false;
@@ -241,8 +241,7 @@ namespace Monster
             itemController.Use_item(_item_type.bubbly_meat);
             itemController.Use_item(_item_type.sweat_juice);
             itemController.Use_item(_item_type.touch_light);
-            //UseItem4();
-            Stop();
+            itemController.Use_item(_item_type.talk_grass);
             Sleep();
 
             //元気ゲージが50％以上のみ育成速度を上昇
@@ -300,136 +299,6 @@ namespace Monster
                     Renderer.flipX = false;//左向き
             }
         }
-        /// <summary>
-        /// アイテム関連
-        /// </summary>
-       /* protected void UseItem1()
-        {
-            Chase_Item("item1");
-            DetectCollider detectCollider = GetComponent<DetectCollider>();
-            //アイテム１の効果適用
-            if (detectCollider.isBubbly == true)
-            {
-                int limit = 30;
-                Debug.Log("Valid item1");
-                if (isStart_bubbly == false)
-                {
-                    item1start = Time.time;
-                    isStart_bubbly = true;
-                }
-                float timer = Time.time - item1start;
-                Debug.Log("アイテム①経過時間　" + timer);
-                //経過時間になったら
-                if (timer > limit)
-                {
-                    detectCollider.isBubbly = false;
-                    Debug.Log("Invalid item1");
-                }
-                //育成スピード増加（アイテム1の効果）
-                second += Time.deltaTime * 1.004f;
-            }
-        }
-
-        protected void UseItem2()
-        {
-            Chase_Item("item2");
-            DetectCollider detectCollider = GetComponent<DetectCollider>();
-            //アイテム2の効果適用
-            if (detectCollider.isSweat == true)
-            {
-                float spanPercent = span * decreasePoint; //元気ゲージの減速量
-                int limit = 30;
-                Debug.Log("Valid item2");
-                if (isStart_sweat == false)
-                {
-                    item2start = Time.time;
-                    isStart_sweat = true;
-                }
-                float timer = Time.time - item2start;
-                Debug.Log("アイテム②経過時間　" + timer);
-                //経過時間になったら
-                if (timer > limit)
-                {
-                    detectCollider.isSweat = false;
-                    Debug.Log("Invalid item2");
-                }
-                //育成時間が10％進むにつれて元気ゲージを増加（アイテム2の効果）
-                if (second - oldSecond > spanPercent)
-                {
-                    nowGauge += 11;
-                    oldSecond = second;
-                    if (nowGauge > 100)
-                        nowGauge = 100;
-                }
-            }
-        }
-
-        protected void UseItem3()
-        {
-            Chase_Item("item3");
-            DetectCollider detectCollider = GetComponent<DetectCollider>();
-            //アイテム3の効果適用
-            if (detectCollider.isTouch == true)
-            {
-                int limit = 30;
-                GameObject target_obj = Instantiate(target);
-                target.GetComponent<MousePoint>().isTarget = true;
-                Debug.Log("Valid item3");
-                if (isStart_touch == false)
-                {
-                    item3start = Time.time;
-                    isStart_touch = true;
-                }
-                float timer = Time.time - item3start;
-                Debug.Log("アイテム③経過時間　" + timer);
-                //経過時間になったら
-                if (timer > limit)
-                {
-                    target.GetComponent<MousePoint>().isTarget = false;
-                    detectCollider.isTouch = false;
-                    Destroy(target_obj);
-                    Debug.Log("Invalid item3");
-                }
-                //アイテム3の効果    
-                if (isTouch == false)
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, target.transform.position, item3speed);
-                }
-            }
-        }
-
-        protected void UseItem4()
-        {
-            Chase_Item("item4");
-            DetectCollider detectCollider = GetComponent<DetectCollider>();
-            //アイテム4の効果適用
-            if (detectCollider.isTalk == true)
-            {
-                GameObject walls;
-                walls = UICanvas.transform.Find("GravityWalls").gameObject;
-                int limit = 30;
-                Rigidbody2D rBody;
-                walls.SetActive(true);
-                Debug.Log("Valid item4");
-                //アイテム4の効果
-                rBody = gameObject.GetComponent<Rigidbody2D>();
-
-                if (isStart_talk == false)
-                {
-                    item4start = Time.time;
-                    isStart_talk = true;
-                }
-                float timer = Time.time - item4start;
-                Debug.Log("アイテム➃経過時間　" + timer);
-                //経過時間になったら
-                if (timer > limit)
-                {
-                    detectCollider.isTalk = false;
-                    walls.SetActive(false);
-                    Debug.Log("Invalid item4");
-                }
-            }
-        }*/
 
     }
 }

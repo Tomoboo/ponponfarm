@@ -10,10 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7229502421907864168}
   - component: {fileID: 3065739076857933741}
-  - component: {fileID: -8406011555809853699}
-  - component: {fileID: 2240039217400614436}
+  - component: {fileID: 2504070599589393263}
+  - component: {fileID: 8037219668111256335}
+  - component: {fileID: -2076447859892465731}
+  - component: {fileID: -6361751720729471259}
   m_Layer: 0
-  m_Name: Cabbage
+  m_Name: Banana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 0749603d67584ca408e33dd45441aa1b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9099dc3cc1501b44c84409fad4efdae9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,19 +88,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-8406011555809853699
-MonoBehaviour:
+--- !u!70 &2504070599589393263
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644657921535100424}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc765fcc05b54364995e1b297bbd1017, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2240039217400614436
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 5.64, y: 4.16}
+  m_Direction: 0
+--- !u!114 &8037219668111256335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,3 +116,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86533d9436559f44b9f3566dca006c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2076447859892465731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644657921535100424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785a525e4b4792a4188f11accd29fdc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6361751720729471259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644657921535100424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a31d57a144cd46c2967f93c7b7d44a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commentPrefab: {fileID: 4856457371863589853, guid: e0f3f7f9dc45347db9a95608e12b3b1a, type: 3}
+  targetPrefab: {fileID: 6153936456500625367, guid: 550c09f6b97bf2a4f847825729d777ac, type: 3}
+  touch_light_speed: 0
+  decreasePoint: 0.005

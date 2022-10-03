@@ -31,7 +31,7 @@ public class Orange : MonsterController
         itemController.Use_item(_item_type.bubbly_meat);
         itemController.Use_item(_item_type.sweat_juice);
         itemController.Use_item(_item_type.touch_light);
-        //UseItem4();
+        itemController.Use_item(_item_type.talk_grass);
         Stop();
         Sleep();
 

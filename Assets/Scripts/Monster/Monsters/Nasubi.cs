@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Monster;
 using Item_farm;
 
@@ -10,10 +11,10 @@ public class Nasubi : MonsterController
     new void Start()
     {
         base.Start();
+        type = monster_type.nasubi;
         int size = 5;
         span = 10.0f;
         col_size = 7;
-        monster_num = 0;
         var col = gameObject.GetComponent<CapsuleCollider2D>();
         col.size = new Vector3(size, size, size);
     }
@@ -32,7 +33,7 @@ public class Nasubi : MonsterController
         itemController.Use_item(_item_type.bubbly_meat);
         itemController.Use_item(_item_type.sweat_juice);
         itemController.Use_item(_item_type.touch_light);
-        //UseItem4();
+        itemController.Use_item(_item_type.talk_grass);
         Stop();
         Sleep();
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Monster;
 
 public class GameDirector : MonoBehaviour
 {
@@ -8,28 +9,33 @@ public class GameDirector : MonoBehaviour
     [SerializeField] GameObject Coin_Prefab;
     [SerializeField] GameObject Nasubi_Prefab;
     [SerializeField] GameObject Orange_Prefab;
+    [SerializeField] GameObject Carot_Prefab;
+    [SerializeField] GameObject Cabbage_Prefab;
+    [SerializeField] GameObject Banana_Prefab;
+    [SerializeField] GameObject Corn_Prefab;
+    [SerializeField] GameObject Pieman_Prefab;
+    [SerializeField] GameObject Peach_Prefab;
+    [SerializeField] GameObject Melon_Prefab;
+    [SerializeField] GameObject Suika_Prefab;
     [System.NonSerialized] public GameObject Lock_item1;
     [System.NonSerialized] public GameObject Lock_item2;
     [System.NonSerialized] public GameObject Lock_item3;
     [System.NonSerialized] public GameObject Lock_item4;
-    TextMeshProUGUI coin_text;
-    TextMeshProUGUI kansha_text;
+    TextMeshProUGUI coin_text, kansha_text;
+    public TextMeshProUGUI complete_text;
     //BuyMonster buyMonster;
     public Transform parentTran;
     public int HoldCoin = 0;
-    public int pick_monster = -1;
+    public monster_type pick_monster;
     [Header("感謝の涙")] public int kanshanonamida = 0;
     private Transform UiTran;
     private GameObject coin;
     private GameObject kansha;
-    private GameObject MsScreen1;
-    private GameObject MsScreen2;
-    private GameObject MsScreen3;
-    private GameObject ItemScreen;
-    private GameObject Nasubi;
-    private GameObject Notice_nasubi;
-    private GameObject Orange;
-    private GameObject Notice_orange;
+    private GameObject MsScreen1, MsScreen2, MsScreen3, ItemScreen;
+    private GameObject Nasubi, Orange, Carot, Cabbage, Banana, Corn, Pieman, Peach, Melon, Suika;
+    private GameObject Notice_nasubi, Notice_orange, Notice_carot, Notice_cabbage, Notice_banana,
+                       Notice_corn, Notice_pieman, Notice_peach, Notice_melon, Notice_suika;
+ 
     void Start()
     {
         coin = GameObject.Find("StatusBar_Group_Light_GrayButton").transform.Find("Status_Coin").gameObject;
@@ -85,41 +91,76 @@ public class GameDirector : MonoBehaviour
             Coin_array[i].transform.localScale = scale;
         }
     }
-    public void FarmComplete(int num)
+    public void FarmComplete(monster_type type)
     {
         Debug.Log("育成 Complete");
-        switch (num)
-        { 
-            
-            case 0:  //Nasubi
+        switch (type)
+        {
+            case monster_type.nasubi:  
                 Debug.Log("nasubi Farm Complete");
-                //Coin_Get();
+                complete_text.text = "育成が終わったよ";
                 HoldCoin += 3000;
                 break;
-            case 1: //Orange
+            case monster_type.orange: 
                 Debug.Log("orange Farm Complete");
+                complete_text.text = "育成が終わったよ";
+                HoldCoin += 3000;
+                break;
+            case monster_type.carot: 
+                Debug.Log("carot Farm Complete");
+                complete_text.text = "育成が終わったよ";
+                HoldCoin += 3000;
+                break;
+            case monster_type.cabbage: 
+                Debug.Log("cabbage Farm Complete");
+                complete_text.text = "育成が終わったよ";
+                HoldCoin += 3000;
+                break;
+            case monster_type.banana: 
+                Debug.Log("banana Farm Complete");
+                complete_text.text = "育成が終わったよ";
+                HoldCoin += 3000;
+                break;
+            case monster_type.corn: 
+                Debug.Log("corn Farm Complete");
+                complete_text.text = "育成が終わったよ";
+                HoldCoin += 3000;
+                break;
+            case monster_type.pieman: 
+                Debug.Log("pieman Farm Complete");
+                complete_text.text = "育成が終わったよ";
+                HoldCoin += 3000;
+                break;
+            case monster_type.peach: 
+                Debug.Log("peach Farm Complete");
+                complete_text.text = "育成が終わったよ";
+                HoldCoin += 3000;
+                break;
+            case monster_type.melon: 
+                Debug.Log("melon Farm Complete");
+                complete_text.text = "育成が終わったよ";
+                HoldCoin += 3000;
+                break;
+            case monster_type.suika: 
+                Debug.Log("suika Farm Complete");
+                complete_text.text = "育成が終わったよ";
                 HoldCoin += 3000;
                 break;
         }
     }
+
     public void FarmItemButtonDown()
     {
         ItemScreen.SetActive(true);
     }
 
-    public void CompleteButtonDown()
-    {
-        HoldCoin += 1000;
-        coin_text.text = HoldCoin.ToString();
-        Debug.Log("CoinGet");
-    }
 #pragma warning disable IDE0060 // 未使用のパラメーターを削除します
     private void Instantiate_Monster(GameObject monster, GameObject monster_prefab, GameObject notice_obj, string notice_obj_name)
 #pragma warning restore IDE0060 // 未使用のパラメーターを削除します
     {
         MsScreen1.SetActive(false);
         monster = Instantiate(monster_prefab);
-        SpriteRenderer Renderer =  monster.GetComponent<SpriteRenderer>();
+        SpriteRenderer Renderer = monster.GetComponent<SpriteRenderer>();
         Renderer.sortingOrder = 1;
         monster.layer = 5;
         monster.name = monster_prefab.name;
@@ -130,63 +171,88 @@ public class GameDirector : MonoBehaviour
         notice_obj = GameObject.Find(notice_obj_name);
         Destroy(notice_obj);
     }
+
     public void Paynow()
     {
         if (GameObject.Find("Notice_Nasubi") != null)
-            pick_monster = 0;
+            pick_monster = monster_type.nasubi;
         else if (GameObject.Find("Notice_Orange") != null)
-            pick_monster = 1;
+            pick_monster = monster_type.orange;
         else
-            pick_monster = -1;
+            pick_monster = monster_type.num;
 
         switch (pick_monster)
         {
-            case 0: //Nasubi
+            case monster_type.nasubi: 
                 Instantiate_Monster(Nasubi, Nasubi_Prefab, Notice_nasubi, "Notice_Nasubi");
                 break;
-            case 1: //Orange
+            case monster_type.orange: 
                 Instantiate_Monster(Orange, Orange_Prefab, Notice_orange, "Notice_Orange");
+                break;
+            case monster_type.carot:
+                Instantiate_Monster(Carot, Carot_Prefab, Notice_carot, "Notice_Carot");
+                break;
+            case monster_type.cabbage:
+                Instantiate_Monster(Cabbage, Cabbage_Prefab, Notice_cabbage, "Notice_Cabbage");
+                break;
+            case monster_type.banana:
+                Instantiate_Monster(Banana, Banana_Prefab, Notice_banana, "Notice_Banana");
+                break;
+            case monster_type.corn:
+                Instantiate_Monster(Corn, Corn_Prefab, Notice_corn, "Notice_Corn");
+                break;
+            case monster_type.pieman:
+                Instantiate_Monster(Pieman, Pieman_Prefab, Notice_pieman, "Notice_Pieman");
+                break;
+            case monster_type.peach:
+                Instantiate_Monster(Peach, Peach_Prefab, Notice_peach, "Notice_Peach");
+                break;
+            case monster_type.melon:
+                Instantiate_Monster(Melon, Melon_Prefab, Notice_melon, "Notice_Melon");
+                break;
+            case monster_type.suika: 
+                Instantiate_Monster(Suika, Suika_Prefab, Notice_suika, "Notice_Suika");
                 break;
         }
     }
 
     public void BuyButtonDown(int num)
     {
-        int price1 = 100;
-        int price2 = 200;
-        int price3 = 300;
-        int price4 = 400;
+        int bubbly_meat_price = 100;
+        int sweat_juice_price = 200;
+        int touch_light_price = 300;
+        int talk_grass_price = 400;
 
         switch (num)
         {
             case 0:
-                if (HoldCoin > price1)
+                if (HoldCoin > bubbly_meat_price)
                 {
-                    HoldCoin -= price1;
+                    HoldCoin -= bubbly_meat_price;
                     coin_text.text = HoldCoin.ToString();
                     Lock_item1.SetActive(false);
                 }
                 break;
             case 1:
-                if (HoldCoin > price2) 
-                { 
-                    HoldCoin -= price2;
+                if (HoldCoin > sweat_juice_price)
+                {
+                    HoldCoin -= sweat_juice_price;
                     coin_text.text = HoldCoin.ToString();
                     Lock_item2.SetActive(false);
                 }
                 break;
             case 2:
-                if (HoldCoin > price3)
+                if (HoldCoin > touch_light_price)
                 {
-                    HoldCoin -= price3;
+                    HoldCoin -= touch_light_price;
                     coin_text.text = HoldCoin.ToString();
                     Lock_item3.SetActive(false);
                 }
                 break;
             case 3:
-                if (HoldCoin > price4)
+                if (HoldCoin > talk_grass_price)
                 {
-                    HoldCoin -= price4;
+                    HoldCoin -= talk_grass_price;
                     coin_text.text = HoldCoin.ToString();
                     Lock_item4.SetActive(false);
                 }

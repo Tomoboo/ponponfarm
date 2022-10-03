@@ -27,6 +27,8 @@ public class ClickScreen : MonoBehaviour
         EventTrigger.Entry entry = new EventTrigger.Entry();//イベントの設定に入る
         entry.eventID = EventTriggerType.PointerDown;//押した瞬間
 
+        //イベントの設定をEventTriggerに反映
+        eventTrigger.triggers.Add(entry);
         entry.callback.AddListener((x) =>
         {
             if (MsScreen1.activeSelf == true)
@@ -42,8 +44,6 @@ public class ClickScreen : MonoBehaviour
                 S_Trigger4();
         });
 
-        //イベントの設定をEventTriggerに反映
-        eventTrigger.triggers.Add(entry);
     }
 
     private void S_Trigger1()

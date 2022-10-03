@@ -4,13 +4,18 @@ using UnityEngine;
 using Monster;
 using System;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Item_farm
 {
 
     public class ItemController : MonoBehaviour
     {
-        [NonSerialized] public GameObject target_obj; 
+        Camera UiCamera;
+        GameObject UIcanvas;
+        GameObject commentSpawn;
+        Transform parenTran;
+        [NonSerialized] public GameObject target_obj;
         public GameObject commentPrefab;
         public GameObject targetPrefab;
         public float touch_light_speed = 0;
@@ -22,6 +27,9 @@ namespace Item_farm
 
         public void Awake()
         {
+            UiCamera = GameObject.FindWithTag("UICamera").GetComponent<Camera>();
+            UIcanvas = GameObject.FindWithTag("UICanvas");
+            parenTran = UIcanvas.transform;
             touch_light_speed = 0.1f;
         }
 
@@ -53,7 +61,7 @@ namespace Item_farm
                 case _item_type.sweat_juice:
                     //甘いジュースの効果適用
                     Monster.Chase_Item("item2");
-                    if(Detect.isSweat == true)
+                    if (Detect.isSweat == true)
                     {
                         Debug.Log("甘いジュース　効果適用");
                         float spanPercent = Monster.span * decreasePoint; //元気ゲージの減速量
@@ -72,7 +80,7 @@ namespace Item_farm
                             Monster.nowGauge += 11;
                             Monster.oldSecond = Monster.second;
                             if (Monster.nowGauge > 100)
-                            Monster.nowGauge = 100;
+                                Monster.nowGauge = 100;
                         }
                     }
                     break;
@@ -84,9 +92,10 @@ namespace Item_farm
                         int now_pos_x = 400;
                         int now_pos_y = 400;
                         Monster.GetComponent<Drag_Monsters>().enabled = false;
-                        if (GameObject.Find("target") == null){
-                            target_obj = Instantiate(targetPrefab, new Vector3(0,-100,0), Quaternion.identity);
-                            target_obj.name = target.name;
+                        if (GameObject.Find("target") == null)
+                        {
+                            target_obj = Instantiate(targetPrefab, new Vector3(0, -100, 0), Quaternion.identity);
+                            target_obj.name = targetPrefab.name;
 
                             target_obj.GetComponent<MousePoint>().isTarget = true;
                         }
@@ -103,58 +112,78 @@ namespace Item_farm
                             Monster.GetComponent<Drag_Monsters>().enabled = true;
                         }
                         //アイテム3の効果    
-                        if (Detect.isTouchtarget == false)
+                        if (Detect.isTouchtarget != true)
                         {
                             Transform tran;
                             tran = Monster.transform;
                             if ((-now_pos_x < tran.position.x) && (tran.position.x < now_pos_x)
-                                && (-now_pos_y < tran.position.x) && (tran.position.x < now_pos_y)){
-                                    Monster.transform.position = Vector3.MoveTowards(Monster.transform.position, target_obj.transform.position, touch_light_speed);
-                                }
-                            
+                                && (-now_pos_y < tran.position.x) && (tran.position.x < now_pos_y))
+                            {
+                                Monster.transform.position = Vector3.MoveTowards(Monster.transform.position, target_obj.transform.position, touch_light_speed);
+                            }
+
                         }
                     }
                     break;
                 case _item_type.talk_grass:
                     Monster.Chase_Item("item4");
                     //甘いジュースの効果適用
-                    if(Detect.isTalk == true)
+                    if (Detect.isTalk == true)
                     {
-                        Debug.Log("しゃべれ草　効果適用");
+                        //Debug.Log("しゃべれ草　効果適用");
                         Monster.GetComponent<Info_AnimateDialog_Open>().enabled = false;
                         talk.Effect_time += Time.deltaTime;
-                        Debug.Log("しゃべれ草:経過時間　" + talk.Effect_time);
+                        //Debug.Log("しゃべれ草:経過時間　" + talk.Effect_time);
                         //経過時間になったら
                         if (talk.Effect_time > talk.Limit_time)
                         {
                             Monster.GetComponent<Info_AnimateDialog_Open>().enabled = true;
                             Detect.isTalk = false;
-                            Debug.Log("しゃべれ草　効果終了");
+                            //Debug.Log("しゃべれ草　効果終了");
                             talk.Effect_time = 0;
                         }
-                        gameObject.AddComponent<EventTrigger>();//EventTriggerコンポーネントを取得
-                        EventTrigger eventTrigger = gameObject.GetComponent<EventTrigger>();
-                        EventTrigger.Entry entry = new EventTrigger.Entry();//イベントの設定に入る
-                        entry.eventID = EventTriggerType.PointerDown;//押した瞬間
-
-                        entry.callback.AddListener((x) =>
+                        if (Input.GetMouseButtonDown(0))
                         {
-                            CreateComment();
-                        });
+                            Ray ray = UiCamera.ScreenPointToRay(Input.mousePosition);
+                            float max_distance = 100.0f;
+                            RaycastHit2D hit_info = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, max_distance);
 
-                        //イベントの設定をEventTriggerに反映
-                        eventTrigger.triggers.Add(entry);
+                            if (hit_info.collider)
+                            {
+                                if (hit_info.collider.gameObject.CompareTag("Monster"))
+                                {
+                                    CreateComment();
+                                }
+                            }
+
+                        }
 
                     }
+                    break;
             }
         }
 
         public void CreateComment()
         {
-            GameObject commentSpawn = Instantiate(commentPrefab);
-            commentSpawn.transform = new Vector3()
-            commentSpawn.transform.SetParent(gameObject.transform);
-            Destroy(commentSpawn,5.0f);
+            Vector3 tran;
+            float adjust_x = 0.5f;
+            float adjust_y = 1.0f;
+            tran = gameObject.transform.position;
+            float x = tran.x;
+            float y = tran.y;
+            float z = tran.z;
+            if (GameObject.FindWithTag("comment") == null)
+            {
+                commentSpawn = Instantiate(commentPrefab);
+                commentSpawn.transform.position = new Vector3(x + adjust_x, y + adjust_y, z);
+                commentSpawn.transform.SetParent(parenTran);
+                Vector3 kero = new(1, 1, 1);
+                kero.x = 1;
+                kero.y = 1;
+                kero.z = 1;
+                commentSpawn.transform.localScale = kero;
+            }
+            Destroy(commentSpawn, 10.0f);
         }
 
         // Update is called once per frame

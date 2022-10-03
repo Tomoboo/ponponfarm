@@ -48,12 +48,7 @@ public class Info_Monsters : MonoBehaviour
             {
                 
                 GameObject Msfram = Monster_infoPrefab.transform.Find("Monster_Fram").gameObject;
-                /////////////////////////// //TimerText////////////////////////////
-                /*timerText = Msfram.transform.Find("Text_Time").GetComponent<TextMeshProUGUI>();
-                 timerText.text =
-                     hour.ToString("00") + "����" + minute.ToString("00") + "��" +
-                       ((int)second).ToString("00") + "�b";*/
-                /////////////////////////////EneGauge/////////////////////////////
+
                 EneGauge = Msfram.transform.Find("EnergyGauge").GetComponent<Slider>();
                 valuetext = EneGauge.transform.Find("Text_Value").GetComponent<TextMeshProUGUI>();
 

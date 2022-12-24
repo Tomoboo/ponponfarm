@@ -35,10 +35,6 @@ public class RectScalerWithViewport : MonoBehaviour
         UpdateRectWithCheck();
     }
 
-    private void OnValidate()
-    {
-        UpdateRect();
-    }
 
     void UpdateRectWithCheck()
     {

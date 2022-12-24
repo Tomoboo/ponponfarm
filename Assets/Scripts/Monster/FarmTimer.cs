@@ -10,11 +10,10 @@ public class FarmTimer : MonoBehaviour
     [SerializeField] private GameObject monsterPrefab;
     private GameObject monster;
     protected TextMeshProUGUI timerText;
-    public float second;
-    public int minute;
-    public int hour;
+    [System.NonSerialized] public float timerSecond;
+    [System.NonSerialized] public int timerMinute;
+    [System.NonSerialized] public int timerHour;
 
-    
 
     protected virtual void Awake()
     {
@@ -23,47 +22,118 @@ public class FarmTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
-    private void Judge_monster (string name)
+
+    // Update is called once per frame
+    protected virtual void Update()
+    {
+        if (GameObject.FindWithTag("Monster"))
+        {
+            Judge_monster_timer(monsterPrefab.name);
+            timerText.text =
+                timerHour.ToString("00") + "時間" + timerMinute.ToString("00") + "分" +
+                ((int)timerSecond).ToString("00") + "秒";
+        }
+    }
+
+    public void Judge_monster_timer(string name)
     {
         switch (name)
         {
             case "Nasubi":
-                Debug.Log("Nasubi selected");
-                monster  = GameObject.Find("Nasubi");
-                second = monster.GetComponent<Nasubi>().second;
-                minute = monster.GetComponent<Nasubi>().minute;
-                hour = monster.GetComponent<Nasubi>().hour;
+                if (monster == null)
+                {
+                    monster = GameObject.Find("Nasubi");
+                }
+                timerSecond = monster.GetComponent<Nasubi>().param.second;
+                timerMinute = monster.GetComponent<Nasubi>().param.minute;
+                timerHour = monster.GetComponent<Nasubi>().param.hour;
                 break;
             case "Orange":
-                Debug.Log("Orange selected");
-                monster  = GameObject.Find("Orange");
-                second = monster.GetComponent<Orange>().second;
-                minute = monster.GetComponent<Orange>().minute;
-                hour = monster.GetComponent<Orange>().hour;
+                if (monster == null)
+                {
+                    monster = GameObject.Find("Orange");
+                }
+                timerSecond = monster.GetComponent<Orange>().param.second;
+                timerMinute = monster.GetComponent<Orange>().param.minute;
+                timerHour = monster.GetComponent<Orange>().param.hour;
                 break;
             case "Carot":
-                Debug.Log("Carot selected");
+                if (monster == null)
+                {
+                    monster = GameObject.Find("Carot");
+                }
+                timerSecond = monster.GetComponent<Carot>().param.second;
+                timerMinute = monster.GetComponent<Carot>().param.minute;
+                timerHour = monster.GetComponent<Carot>().param.hour;
                 break;
             case "Cabbage":
-                Debug.Log("Cabbage selected");
+                if (monster == null)
+                {
+                    monster = GameObject.Find("Cabbage");
+                }
+                timerSecond = monster.GetComponent<Cabbage>().param.second;
+                timerMinute = monster.GetComponent<Cabbage>().param.minute;
+                timerHour = monster.GetComponent<Cabbage>().param.hour;
                 break;
             case "Banana":
-                Debug.Log("Banana selected");
+                if (monster == null)
+                {
+                    monster = GameObject.Find("Banana");
+                }
+                timerSecond = monster.GetComponent<Banana>().param.second;
+                timerMinute = monster.GetComponent<Banana>().param.minute;
+                timerHour = monster.GetComponent<Banana>().param.hour;
+                break;
+            case "Corn":
+                if (monster == null)
+                {
+                    monster = GameObject.Find("Corn");
+                }
+                timerSecond = monster.GetComponent<Corn>().param.second;
+                timerMinute = monster.GetComponent<Corn>().param.minute;
+                timerHour = monster.GetComponent<Corn>().param.hour;
+                break;
+            case "Pieman":
+                if (monster == null)
+                {
+                    monster = GameObject.Find("Pieman");
+                }
+                timerSecond = monster.GetComponent<Pieman>().param.second;
+                timerMinute = monster.GetComponent<Pieman>().param.minute;
+                timerHour = monster.GetComponent<Pieman>().param.hour;
+                break;
+            case "Peach":
+                if (monster == null)
+                {
+                    monster = GameObject.Find("Peach");
+                }
+                timerSecond = monster.GetComponent<Peach>().param.second;
+                timerMinute = monster.GetComponent<Peach>().param.minute;
+                timerHour = monster.GetComponent<Peach>().param.hour;
+                break;
+            case "Melon":
+                if (monster == null)
+                {
+                    monster = GameObject.Find("Melon");
+                }
+                timerSecond = monster.GetComponent<Melon>().param.second;
+                timerMinute = monster.GetComponent<Melon>().param.minute;
+                timerHour = monster.GetComponent<Melon>().param.hour;
+                break;
+            case "Suika":
+                if (monster == null)
+                {
+                    monster = GameObject.Find("Suika");
+                }
+                timerSecond = monster.GetComponent<Suika>().param.second;
+                timerMinute = monster.GetComponent<Suika>().param.minute;
+                timerHour = monster.GetComponent<Suika>().param.hour;
                 break;
         }
-        
+
     }
-    // Update is called once per frame
-    protected virtual void Update()
-    {
-        if(GameObject.FindWithTag("Monster")){
-                Judge_monster(monsterPrefab.name);
-                timerText.text =
-                    hour.ToString("00") + "時間" + minute.ToString("00") + "分" +
-                    ((int)second).ToString("00") + "秒";
-            }
-    }
+
 }
 

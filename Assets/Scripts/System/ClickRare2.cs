@@ -11,9 +11,10 @@ public class ClickRare2 : MonoBehaviour
 
     void Awake()
     {
-        this.MsScreen1 = GameObject.Find("UICanvas").transform.Find("MonsterScreen").gameObject;
-        this.MsScreen2 = GameObject.Find("UICanvas").transform.Find("MonsterScreen – 1").gameObject;
-        this.MsScreen3 = GameObject.Find("UICanvas").transform.Find("MonsterScreen – 2").gameObject;
+        GameObject UICanvas = GameObject.FindWithTag("UICanvas");
+        MsScreen1 = UICanvas.transform.Find("MonsterScreens").transform.GetChild(0).gameObject;
+        MsScreen2 = UICanvas.transform.Find("MonsterScreens").transform.GetChild(1).gameObject;
+        MsScreen3 = UICanvas.transform.Find("MonsterScreens").transform.GetChild(2).gameObject;
     }
 
     void Start()
@@ -25,7 +26,7 @@ public class ClickRare2 : MonoBehaviour
 
         entry.callback.AddListener((x) =>
         {
-                SwitchScreen2();
+            SwitchScreen2();
         });
 
         //イベントの設定をEventTriggerに反映

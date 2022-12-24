@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class MousePoint : MonoBehaviour
 {
-    private Vector3 mousePosition;
-    private Vector3 objPosition;
-    Camera UIcamera;
-    public bool isTarget = false;
+    public bool isTouchTarget = false;
+    public float baseWidth;
+    public float baseHeight;
 
-    void Awake()
-    {
-        UIcamera = GameObject.Find("UI Camera").GetComponent<Camera>();
-        Vector2 pos = new(0,5);
-        transform.position = pos;
-    }
     void Update()
     {
-        if (isTarget == true)
+        if (isTouchTarget == true)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                mousePosition = Input.mousePosition;
-                mousePosition.z = 10.0f;
-                objPosition = UIcamera.ScreenToWorldPoint(mousePosition);
-                this.transform.position = objPosition;
+                MovePosition();
             }
         }
+    }
 
+    private void MovePosition()
+    {
+        float x = baseWidth *
+            (Input.mousePosition.x / Screen.width) - (baseWidth / 2);
+        float y = baseHeight *
+            (Input.mousePosition.y / Screen.height) - (baseHeight / 2);
+        Debug.Log("mousePosition = " + Input.mousePosition);
+
+        transform.localPosition = new Vector3(x, y, 0);
+
+        Debug.Log(transform.localPosition);
     }
 }

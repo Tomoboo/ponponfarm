@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1003534563558498591}
   - component: {fileID: 5055586735123212451}
   - component: {fileID: 274656469683096911}
-  - component: {fileID: 5295995967590711585}
   - component: {fileID: -6427124530388047026}
   m_Layer: 5
   m_Name: comment
@@ -100,23 +99,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5295995967590711585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4856457371863589853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0f52d94d1e74457ab3f25295090f84a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SheetID: 1ZEp4I2mvnrAIcEU5CjmcyCc-gDJ6Q4MEj-JaFO7z0L8
-  SheetName: "\u3057\u3083\u3079\u308C\u8349"
-  OnLoadEnd:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &-6427124530388047026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,8 +148,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: 18}
-  m_SizeDelta: {x: 214.2975, y: 115.3686}
+  m_AnchoredPosition: {x: 1, y: 26}
+  m_SizeDelta: {x: 214.2975, y: 175.6364}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5966209181647580715
 CanvasRenderer:
@@ -199,8 +181,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 87765f14ad87a1b4fb29ebeb32872a16, type: 2}
-  m_sharedMaterial: {fileID: -5411139572334870936, guid: 87765f14ad87a1b4fb29ebeb32872a16, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fde698132a521417c8d0e85fcbfc3e2c, type: 2}
+  m_sharedMaterial: {fileID: -3193840197911233019, guid: fde698132a521417c8d0e85fcbfc3e2c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -224,15 +206,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -260,7 +242,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 17.725891, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -283,6 +265,7 @@ MonoBehaviour:
   OnLoadEnd:
     m_PersistentCalls:
       m_Calls: []
+  Comment: {fileID: 0}
 --- !u!114 &5747213575199426415
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,12 +9,22 @@ TagManager:
   - item3
   - item4
   - ItemdropArea
-  - Ban
   - Monster_Info
   - Coin
   - UICanvas
   - Monster
   - UICamera
+  - comment
+  - FarmDirector
+  - GameDirector
+  - ItemDirector
+  - DeliveryBox
+  - AudioDirector
+  - AdController
+  - item1_locked
+  - item2_locked
+  - item3_locked
+  - item4_locked
   layers:
   - Default
   - TransparentFX
@@ -51,6 +61,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Monster
+    uniqueID: 4234862257
     locked: 0
   - name: UI
     uniqueID: 3100038831

@@ -2,38 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
-public class Drag_Monsters : MonoBehaviour,IDragHandler, IBeginDragHandler, IEndDragHandler
+public class Drag_Monsters : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [System.NonSerialized] public Transform parenTran;
     private Vector3 preposition;
-    private bool isDrag;
+    public bool isDrag { get; set; } = false;
     Vector3 worldpoint;
     Vector3[] corners;
     Camera UIcamera;
+
+    void InvalidClick()
+    {
+        if (isDrag == true)
+            gameObject.GetComponent<Info_AnimateDialog_Open>().enabled = false;
+        else
+            gameObject.GetComponent<Info_AnimateDialog_Open>().enabled = true;
+    }
 
     void Judge_ScriptEnabled(string name)
     {
         switch (name)
         {
             case "Nasubi":
-                Debug.Log("Nasubi selected");
-                if (isDrag == true)
-                    gameObject.GetComponent<Info_AnimateDialog_Open>().enabled = false;
-                else
-                    gameObject.GetComponent<Info_AnimateDialog_Open>().enabled = true;
+                InvalidClick();
                 break;
             case "Orange":
-                Debug.Log("Orange selected");
+                InvalidClick();
                 break;
             case "Carot":
-                Debug.Log("Carot selected");
+                InvalidClick();
                 break;
             case "Cabbage":
-                Debug.Log("Cabbage selected");
+                InvalidClick();
                 break;
             case "Banana":
-                Debug.Log("Banana selected");
+                InvalidClick();
+                break;
+            case "Corn":
+                InvalidClick();
+                break;
+            case "Pieman":
+                InvalidClick();
+                break;
+            case "Peach":
+                InvalidClick();
+                break;
+            case "Melon":
+                InvalidClick();
+                break;
+            case "Suika":
+                InvalidClick();
                 break;
 
         }
@@ -41,7 +59,6 @@ public class Drag_Monsters : MonoBehaviour,IDragHandler, IBeginDragHandler, IEnd
     void Awake()
     {
         GameObject DropArea = GameObject.Find("ItemDropAreas");
-        isDrag = false;
         UIcamera = GameObject.Find("UI Camera").GetComponent<Camera>();
         //preposition = new Vector3(0.09f, -0.38f, 0);
         var rectTransform = DropArea.GetComponent<RectTransform>();
@@ -90,7 +107,7 @@ public class Drag_Monsters : MonoBehaviour,IDragHandler, IBeginDragHandler, IEnd
             worldpos.x = corners[2].x - diff;
             transform.position = worldpos;
         }
-        else if(worldpos.y > corners[2].y) //四隅の上部
+        else if (worldpos.y > corners[2].y) //四隅の上部
         {
             worldpos.y = corners[1].y - diff;
             transform.position = worldpos;

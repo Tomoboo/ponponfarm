@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 7071134303665069292}
   - component: {fileID: 2257163404549255115}
   - component: {fileID: -54424525663899706}
-  - component: {fileID: 2379583937650549345}
   - component: {fileID: 5280338422771757414}
   - component: {fileID: 8531181276429695775}
+  - component: {fileID: 2924743981649542009}
+  - component: {fileID: -1385379112226268790}
   m_Layer: 0
   m_Name: Carot
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -60105039
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: e8519ccc8e8668d4b91c36addf496ae4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,18 +105,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 4.21, y: 5.42}
   m_Direction: 0
---- !u!114 &2379583937650549345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977853451161413068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86533d9436559f44b9f3566dca006c5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5280338422771757414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +130,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commentPrefab: {fileID: 4856457371863589853, guid: e0f3f7f9dc45347db9a95608e12b3b1a, type: 3}
-  targetPrefab: {fileID: 6153936456500625367, guid: 550c09f6b97bf2a4f847825729d777ac, type: 3}
-  touch_light_speed: 0
-  decreasePoint: 0.005
+  targetPrefab: {fileID: 8157464120815137406, guid: 550c09f6b97bf2a4f847825729d777ac, type: 3}
+  touch_light_speed: 1
+--- !u!114 &2924743981649542009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7977853451161413068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102edccbc9b074f52b764c5be4bbb157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedX: 0.5
+  speedY: 0.1
+  accelerationX: 2
+  normalImage: {fileID: 21300000, guid: e8519ccc8e8668d4b91c36addf496ae4, type: 3}
+  cryImage: {fileID: 21300000, guid: 1525968f64acc6b4bb3c649975a4153e, type: 3}
+  sleepImage: {fileID: 21300000, guid: a91e5bfc8db704ab6b432aa9b6af0a13, type: 3}
+  size: 4
+  span: 600
+  moveRate: 5
+  stopRate: 10
+  sleepRate: 70
+  dropRate: 20
+  limitStop: 2
+  limitSleep: 10
+  limitMove: 10
+  speed: 75
+--- !u!114 &-1385379112226268790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7977853451161413068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce84f6131f2fd64b88aba98aafd5885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ms_infoPrefab: {fileID: 2813800812519651751, guid: e0bd3e1a0e5568a49b1613c7fa1494b1, type: 3}
+  _animator: {fileID: 3861418775388798852, guid: e0bd3e1a0e5568a49b1613c7fa1494b1, type: 3}
+  _layer: 0

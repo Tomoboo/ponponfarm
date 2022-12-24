@@ -5,43 +5,30 @@ using UnityEngine.Events;
 
 
 /// <summary>
-/// ƒ_ƒCƒAƒƒO‚ÌƒA“ñƒ[ƒVƒ‡ƒ“
+
 /// </summary>
 
 public class AnimatedDialog : MonoBehaviour
 {
-    //ƒAƒjƒ[ƒ^[
     [SerializeField] private Animator _animator;
-    //ƒAƒjƒ[ƒ^[ƒRƒ“ƒgƒ[ƒ‰[‚ÌƒŒƒCƒ„[
     [SerializeField] private int _layer;
-    //isOpenƒtƒ‰ƒOiƒAƒjƒ[ƒ^[ƒRƒ“ƒgƒ[ƒ‰[“à‚Å’è‹`‚µ‚½ƒtƒ‰ƒOj
     private static readonly int ParamIsOpen = Animator.StringToHash("IsOpen");
-    //ƒ_ƒCƒAƒƒO‚ÍŠJ‚¢‚Ä‚¢‚é‚©‚Ç‚¤‚©
     public bool IsOpen => gameObject.activeSelf;
-    //ƒAƒjƒ[ƒVƒ‡ƒ“’†‚©‚Ç‚¤‚©
     public bool IsTransition { get; private set; }
 
-    //ƒ_ƒCƒAƒƒO‚ğŠJ‚­
     public void Open()
     {
-        //•s‘€ì–h~
         //if (IsOpen || IsTransition) return;
-        //ƒpƒlƒ‹©‘Ì‚ğƒAƒNƒeƒBƒu‚É‚·‚é
         gameObject.SetActive(true);
-        //IsOpenƒtƒ‰ƒO‚ğƒŠƒZƒbƒg
+        //IsOpenï¿½tï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½g
         _animator.SetBool(ParamIsOpen, true);
-        //ƒAƒjƒ[ƒVƒ‡ƒ“‘Ò‹@
         //StartCoroutine(WaitAnimation("Shown"));
     }
 
-    //ƒ_ƒCƒAƒƒO‚ğ•Â‚¶‚é
     public void Close()
     {
-        //•s‘€ì–h~
        // if (!IsOpen || IsTransition) return;
-        //IsOpenƒtƒ‰ƒO‚ğƒNƒŠƒA
         _animator.SetBool(ParamIsOpen, false);
-        //ƒAƒjƒ[ƒVƒ‡ƒ“‘Ò‹@‚µAI‚í‚Á‚½‚çƒpƒlƒ‹©‘Ì‚ğ”ñƒAƒNƒeƒBƒu‚É‚·‚é
         //StartCoroutine(WaitAnimation("Hidden", () => gameObject.SetActive(false)));
     }
 
@@ -51,7 +38,6 @@ public class AnimatedDialog : MonoBehaviour
 
         yield return new WaitUntil(() =>
         {
-            //ƒXƒe[ƒg‚ª•Ï‰»‚µAƒAƒjƒ[ƒVƒ‡ƒ“‚ªI—¹‚·‚é‚Ü‚Åƒ‹[ƒv
             var state = _animator.GetCurrentAnimatorStateInfo(_layer);
             return state.IsName(stateName) && state.normalizedTime >= 1;
         });

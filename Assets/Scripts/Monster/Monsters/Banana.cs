@@ -11,71 +11,44 @@ public class Banana : MonsterController
     new void Start()
     {
         base.Start();
-        type = monster_type.orange;
-        int size = 5;
-        span = 10.0f;
-        col_size = 7;
-        var col = gameObject.GetComponent<CapsuleCollider2D>();
-        col.size = new Vector3(size, size, size);
+        type = monster_type.banana;
     }
 
-    // Update is called once per frame
-    protected override void Update()
+    protected override void FarmTime()
     {
-        
-        Random.InitState(System.DateTime.Now.Millisecond);
-        detectCollider = GetComponent<DetectCollider>();
-        Enepower_flg = UICanvas.GetComponent<Info_Monsters>().Enepower_flg; 
-        float spanPercent = span * decreasePoint;
-        ItemController itemController = GetComponent<ItemController>();
-
-        FarmTime();
-        itemController.Use_item(_item_type.bubbly_meat);
-        itemController.Use_item(_item_type.sweat_juice);
-        itemController.Use_item(_item_type.touch_light);
-        itemController.Use_item(_item_type.talk_grass);
-        Stop();
-        Sleep();
-
-        if (detectCollider.isTouch == false && isStop == false && isSleep == false &&
-           (GameObject.FindWithTag("item1") == null) && (GameObject.FindWithTag("item2") == null) &&
-           (GameObject.FindWithTag("item3") == null) && (GameObject.FindWithTag("item4") == null))
+        param.sumTime += Time.deltaTime;
+        param.second += Time.deltaTime;
+        if (param.second > 60f)
         {
-            // stopTimer & sleepTimer Reset
-            stopTimer = 0;
-            sleepTimer = 0;
-            
-            if (Random.Range(0, 100) < Moverate && isMove == false)
-                Move();
-            else if (isMove == true)
-                Move();
-            
-            if (currentpos.x < targetpos.x)
-                {
-                Renderer.flipX = true;
-            }  
-            else
-                {
-                Renderer.flipX = false;
-            }
+            param.minute += 1;
+            param.second = 0;
+        }
+        if (param.minute > 60)
+        {
+            param.hour++;
+            param.minute = 0;
+        }
+        //育成時間に達したら
+        if (param.sumTime >= span && isComplete == false)   //本来はparam.second →　param.hour
+        {
+            isComplete = true;
+            // モンスターごとに引数設定
+            _farmDirector.FarmComplete(type);
         }
 
-        
-        if (Enepower_flg == true)
-            {
-                second += Time.deltaTime * 1.002f;
-            }
-
-            
-            if (second - oldSecond > spanPercent)
-            {
-                nowGauge -= 10;
-                oldSecond = second;
-                if (nowGauge < 0)
-                    nowGauge = 0;
-            }
-
+        else if (param.sumTime > (span / 2))
+        {
+            isScale = true;
+            Vector3 kero = new(65, 65, 1);
+            this.transform.localScale = kero;
+            var col = gameObject.GetComponent<CapsuleCollider2D>();
+            col.size = new Vector3(size, size, size);
+        }
     }
+
+
+    // Update is called once per frame
+
 
 }
 

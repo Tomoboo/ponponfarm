@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: c008eb0a31ddd48408307b533a522e45
+  - enabled: 0
+    path: Assets/Samples/Advertisement with Mediation/1.0.5/Example Usage/MediationExample.unity
+    guid: 96f8e8fcb6bb8438a90b151cbfcd5cfa
   m_configObjects: {}

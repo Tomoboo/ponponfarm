@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 3532515095864566265}
   - component: {fileID: 2985855794638575457}
   - component: {fileID: -2894329657102485514}
-  - component: {fileID: -2816270125812171564}
-  - component: {fileID: 1255559721398046646}
-  - component: {fileID: 2478200532097060003}
   - component: {fileID: -2468844035523751998}
   - component: {fileID: 1581881278458820273}
+  - component: {fileID: -4340845367690179393}
+  - component: {fileID: 8862751855471105534}
   m_Layer: 5
   m_Name: Orange
   m_TagString: Monster
@@ -76,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -60105039
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: cf4370de398049f41b096a0523148480, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -106,68 +105,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 4.62, y: 4.77}
   m_Direction: 0
---- !u!114 &-2816270125812171564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3350535664232611014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1f6e7aed023d48f1b8b98987dda572a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Moverate: 8
-  Stoprate: 4
-  Sleeprate: 2
-  dropprate: 2
-  span: 0
-  limitStop: 2
-  limitSleep: 10
-  speed: 75
-  isTouch: 0
-  second: 0
-  minute: 0
-  hour: 0
-  decreasePoint: 0.05
---- !u!114 &1255559721398046646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3350535664232611014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86533d9436559f44b9f3566dca006c5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2478200532097060003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3350535664232611014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1f6e7aed023d48f1b8b98987dda572a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Moverate: 8
-  Stoprate: 4
-  Sleeprate: 2
-  dropprate: 2
-  span: 0
-  limitStop: 2
-  limitSleep: 10
-  speed: 75
-  isTouch: 0
-  second: 0
-  minute: 0
-  hour: 0
-  decreasePoint: 0.05
 --- !u!114 &-2468844035523751998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,10 +117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a31d57a144cd46c2967f93c7b7d44a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  commentPrefab: {fileID: 1268543824071322942, guid: 24f9f7fec8d58439fb4e00f75fdbefc2, type: 3}
-  targetPrefab: {fileID: 6153936456500625367, guid: 550c09f6b97bf2a4f847825729d777ac, type: 3}
-  touch_light_speed: 0
-  decreasePoint: 0.005
+  commentPrefab: {fileID: 4856457371863589853, guid: e0f3f7f9dc45347db9a95608e12b3b1a, type: 3}
+  targetPrefab: {fileID: 8157464120815137406, guid: 550c09f6b97bf2a4f847825729d777ac, type: 3}
+  touch_light_speed: 1
 --- !u!114 &1581881278458820273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,3 +135,43 @@ MonoBehaviour:
   Ms_infoPrefab: {fileID: 2813800812519651751, guid: 5c29f1815c9b7d649add13d134bd885f, type: 3}
   _animator: {fileID: 910892346419749563, guid: 5c29f1815c9b7d649add13d134bd885f, type: 3}
   _layer: 0
+--- !u!114 &-4340845367690179393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3350535664232611014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f6e7aed023d48f1b8b98987dda572a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedX: 0.25
+  speedY: 0.1
+  accelerationX: 2
+  normalImage: {fileID: 21300000, guid: cf4370de398049f41b096a0523148480, type: 3}
+  cryImage: {fileID: 21300000, guid: ca4fc2a6c286fe04d91f027d08cc5e7a, type: 3}
+  sleepImage: {fileID: 21300000, guid: 1ea44ec7192fc47b380fa0bd95e05e12, type: 3}
+  size: 4
+  span: 50
+  moveRate: 20
+  stopRate: 10
+  sleepRate: 70
+  dropRate: 50
+  limitStop: 10
+  limitSleep: 10
+  limitMove: 10
+  speed: 75
+--- !u!114 &8862751855471105534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3350535664232611014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785a525e4b4792a4188f11accd29fdc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -10,11 +10,11 @@ public class GSSReader : MonoBehaviour
     public string SheetID = "1ZEp4I2mvnrAIcEU5CjmcyCc-gDJ6Q4MEj-JaFO7z0L8";
     public string SheetName = "しゃべれ草";
     public UnityEvent OnLoadEnd;
-
-    Comment_monster Comment;
+    public Comment_monster Comment;
     bool isRead = false;
     public bool IsLoading { get; private set; }
     public string[][] Datas { get; set; }
+    public static string[][] d;
 
     IEnumerator GetFromWeb()
     {
@@ -38,9 +38,9 @@ public class GSSReader : MonoBehaviour
             else
             {
                 Datas = ConvertCSVtoJaggedArray(request.downloadHandler.text);
-                Comment = GetComponent<Comment_monster>();
 
-                Comment.OnGSSLoadEnd();
+                OnGSSLoadEnd();
+                Debug.Log("Load");
                 isRead = true;
                 //OnLoadEnd.Invoke();
             }
@@ -65,11 +65,26 @@ public class GSSReader : MonoBehaviour
             rows.Add(elements);
         }
         return rows.ToArray();
-    }    // Start is called before the first frame update
+    }
 
+    public void OnGSSLoadEnd()
+    {
+        Debug.Log("GSS Start");
+        if (d == null)
+        {
+            d = Datas;
+            for (var row = 0; row < d.Length; row++)
+            {
+                for (var col = 0; col < d[row].Length; col++)
+                {
+                    Debug.Log("[" + row + "][" + col + "]=" + d[row][col]);
+                }
+            }
+        }
+    }
     void Start()
     {
-
+        Reload();
     }
 
     // Update is called once per frame

@@ -5,17 +5,20 @@ using UnityEngine.EventSystems;
 
 public class ClickScreen : MonoBehaviour
 {
+    private GameObject MsScreen;
     private GameObject MsScreen1;
     private GameObject MsScreen2;
     private GameObject MsScreen3;
     private GameObject ItemScreen;
-    [SerializeField] GameObject notice_info;
-
+    [SerializeField] private GameObject MusicPlayListScreen = null;
+    [SerializeField] private GameObject TutorialScreen = null;
     void Awake()
     {
-        MsScreen1 = GameObject.Find("UICanvas").transform.Find("MonsterScreen").gameObject;
-        MsScreen2 = GameObject.Find("UICanvas").transform.Find("MonsterScreen – 1").gameObject;
-        MsScreen3 = GameObject.Find("UICanvas").transform.Find("MonsterScreen – 2").gameObject;
+        GameObject UICanvas = GameObject.FindWithTag("UICanvas");
+        MsScreen = UICanvas.transform.Find("MonsterScreens").gameObject;
+        MsScreen1 = MsScreen.transform.GetChild(0).gameObject;
+        MsScreen2 = MsScreen.transform.GetChild(1).gameObject;
+        MsScreen3 = MsScreen.transform.GetChild(2).gameObject;
         ItemScreen = GameObject.Find("UICanvas").transform.Find("FarmItemScene").gameObject;
         //Resources.Load("Monster1_info") as GameObject;
     }
@@ -31,17 +34,23 @@ public class ClickScreen : MonoBehaviour
         eventTrigger.triggers.Add(entry);
         entry.callback.AddListener((x) =>
         {
-            if (MsScreen1.activeSelf == true)
+            if (MsScreen1.activeSelf)
                 S_Trigger1();
 
-            if (MsScreen2.activeSelf == true)
+            if (MsScreen2.activeSelf)
                 S_Trigger2();
 
-            if (MsScreen3.activeSelf == true)
+            if (MsScreen3.activeSelf)
                 S_Trigger3();
-         
-            if (ItemScreen.activeSelf == true)
+
+            if (ItemScreen.activeSelf)
                 S_Trigger4();
+
+            if (MusicPlayListScreen.activeSelf)
+                S_Trigger5();
+
+            if (TutorialScreen.activeSelf)
+                S_Trigger6();
         });
 
     }
@@ -49,16 +58,19 @@ public class ClickScreen : MonoBehaviour
     private void S_Trigger1()
     {
         MsScreen1.SetActive(false);
+        MsScreen.SetActive(false);
     }
 
     private void S_Trigger2()
     {
         MsScreen2.SetActive(false);
+        MsScreen.SetActive(false);
     }
 
     private void S_Trigger3()
     {
         MsScreen3.SetActive(false);
+        MsScreen.SetActive(false);
     }
 
     private void S_Trigger4()
@@ -66,10 +78,18 @@ public class ClickScreen : MonoBehaviour
         ItemScreen.SetActive(false);
     }
 
+    private void S_Trigger5()
+    {
+        MusicPlayListScreen.SetActive(false);
+    }
 
+    private void S_Trigger6()
+    {
+        TutorialScreen.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

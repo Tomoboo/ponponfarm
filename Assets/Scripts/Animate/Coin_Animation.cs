@@ -22,7 +22,7 @@ public class Coin_Animation : MonoBehaviour
     private void CoinBar_Forward()
     {
         GameObject coin_icon = GameObject.Find("Icon_Coin");
-        pos = coin_icon.transform.position - transform.position;//　現在の位置から、コインBarオブジェクトまで進むベクトル
+        pos = coin_icon.transform.position - transform.position;
         transform.position += speed * Time.deltaTime * pos;
         speed += plusSpeed;
     }
@@ -33,7 +33,7 @@ public class Coin_Animation : MonoBehaviour
             isCall = true;
         else if (isCall)
             CoinBar_Forward();
-        else if (pos.magnitude < 2.0f)  //近づいたら到着したとみなす
+        else if (pos.magnitude < 2.0f)  
         {
             Destroy(gameObject); 
         }

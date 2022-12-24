@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 8181302896823453308}
   - component: {fileID: 4569050424100478454}
   - component: {fileID: 2537250160806068498}
-  - component: {fileID: 4621593220696776360}
   - component: {fileID: 4793257154771880342}
   - component: {fileID: -817522900874170074}
+  - component: {fileID: -4538706062542197772}
+  - component: {fileID: 8801209042530281749}
   m_Layer: 0
   m_Name: Pieman
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -60105039
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 464bf66abf78f7846963263a000a369f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,18 +105,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 4.34, y: 5.12}
   m_Direction: 0
---- !u!114 &4621593220696776360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471635565392662732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86533d9436559f44b9f3566dca006c5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4793257154771880342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +130,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commentPrefab: {fileID: 4856457371863589853, guid: e0f3f7f9dc45347db9a95608e12b3b1a, type: 3}
-  targetPrefab: {fileID: 6153936456500625367, guid: 550c09f6b97bf2a4f847825729d777ac, type: 3}
-  touch_light_speed: 0
-  decreasePoint: 0.005
+  targetPrefab: {fileID: 8157464120815137406, guid: 550c09f6b97bf2a4f847825729d777ac, type: 3}
+  touch_light_speed: 1
+--- !u!114 &-4538706062542197772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471635565392662732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286298cdde0704ea4b247ccd4ebf9479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedX: 0.5
+  speedY: 0.1
+  accelerationX: 2
+  normalImage: {fileID: 21300000, guid: 464bf66abf78f7846963263a000a369f, type: 3}
+  cryImage: {fileID: 21300000, guid: 3346ab28409419d4a9787d63008c45ab, type: 3}
+  sleepImage: {fileID: 21300000, guid: 02cefa387eb44494592c97994cbcc7b3, type: 3}
+  size: 4
+  span: 1200
+  moveRate: 5
+  stopRate: 10
+  sleepRate: 70
+  dropRate: 2
+  limitStop: 10
+  limitSleep: 10
+  limitMove: 10
+  speed: 75
+--- !u!114 &8801209042530281749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471635565392662732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce84f6131f2fd64b88aba98aafd5885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ms_infoPrefab: {fileID: 2813800812519651751, guid: e2ff3c2b8e002458cbaf3527578bd9bd, type: 3}
+  _animator: {fileID: 3858537091601013641, guid: e2ff3c2b8e002458cbaf3527578bd9bd, type: 3}
+  _layer: 0

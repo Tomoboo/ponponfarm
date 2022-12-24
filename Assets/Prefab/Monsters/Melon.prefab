@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 499062406149739582}
   - component: {fileID: 8588400162333310619}
   - component: {fileID: -5957493591576133346}
-  - component: {fileID: -7300809617749513347}
   - component: {fileID: 7847627121755566748}
   - component: {fileID: -3195651209512107530}
+  - component: {fileID: 5726207578702319120}
+  - component: {fileID: -52111184104742319}
   m_Layer: 0
   m_Name: Melon
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -60105039
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 4c958af4525431243953164594e42df8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,18 +105,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 4.7, y: 3.49}
   m_Direction: 0
---- !u!114 &-7300809617749513347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3809936584458979283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86533d9436559f44b9f3566dca006c5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7847627121755566748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +130,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commentPrefab: {fileID: 4856457371863589853, guid: e0f3f7f9dc45347db9a95608e12b3b1a, type: 3}
-  targetPrefab: {fileID: 6153936456500625367, guid: 550c09f6b97bf2a4f847825729d777ac, type: 3}
-  touch_light_speed: 0
-  decreasePoint: 0.005
+  targetPrefab: {fileID: 8157464120815137406, guid: 550c09f6b97bf2a4f847825729d777ac, type: 3}
+  touch_light_speed: 1
+--- !u!114 &5726207578702319120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809936584458979283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78a394fb46c24038892b202d6c98e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedX: 0.5
+  speedY: 0.1
+  accelerationX: 2
+  normalImage: {fileID: 21300000, guid: 4c958af4525431243953164594e42df8, type: 3}
+  cryImage: {fileID: 21300000, guid: eebcd59158d1ccc42a979f472a713969, type: 3}
+  sleepImage: {fileID: 21300000, guid: a4b6347b55fba46b59b5b319c3ac1451, type: 3}
+  size: 4
+  span: 1800
+  moveRate: 5
+  stopRate: 10
+  sleepRate: 70
+  dropRate: 50
+  limitStop: 2
+  limitSleep: 10
+  limitMove: 10
+  speed: 75
+--- !u!114 &-52111184104742319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809936584458979283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce84f6131f2fd64b88aba98aafd5885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ms_infoPrefab: {fileID: 2813800812519651751, guid: ccb0ee28cf58d4ddbbf7982597342040, type: 3}
+  _animator: {fileID: 4402520428325794058, guid: ccb0ee28cf58d4ddbbf7982597342040, type: 3}
+  _layer: 0

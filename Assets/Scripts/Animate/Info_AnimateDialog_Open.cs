@@ -3,26 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-
-
-/// <summary>
-/// ダイアログのア二メーション
-/// </summary>
+using Monster;
 
 public class Info_AnimateDialog_Open : MonoBehaviour, IPointerClickHandler
 {
-    // モンスター育成情報prefab
     [SerializeField] private GameObject Ms_infoPrefab;
     private GameObject Info;
-    //アニメーター
     [SerializeField] private Animator _animator;
-    //アニメーターコントローラーのレイヤー
     [SerializeField] private int _layer;
-    //isOpenフラグ（アニメーターコントローラー内で定義したフラグ）
     private static readonly int ParamIsOpen = Animator.StringToHash("IsOpen");
-    //ダイアログは開いているかどうか
     public bool IsOpen => gameObject.activeSelf;
-    //アニメーション中かどうか
     public bool IsTransition { get; private set; }
     private GameObject UICanvas;
     private Transform parentTran;
@@ -49,16 +39,11 @@ public class Info_AnimateDialog_Open : MonoBehaviour, IPointerClickHandler
         Open();
     }
 
-    //ダイアログを開く
     public void Open()
     {
-        //パネル自体を生成する
         Instantiate();
-        //不操作防止
         if (IsOpen || IsTransition) { Debug.Log("Open"); return; }
-        //IsOpenフラグをリセット
         _animator.SetBool(ParamIsOpen, true);
-        //アニメーション待機
         StartCoroutine(WaitAnimation("Shown"));
     }
 
@@ -68,7 +53,6 @@ public class Info_AnimateDialog_Open : MonoBehaviour, IPointerClickHandler
 
         yield return new WaitUntil(() =>
         {
-            //ステートが変化し、アニメーションが終了するまでループ
             var state = _animator.GetCurrentAnimatorStateInfo(_layer);
             return state.IsName(stateName) && state.normalizedTime >= 1;
         });

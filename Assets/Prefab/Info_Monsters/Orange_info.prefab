@@ -1193,9 +1193,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 3350535664232611014, guid: 28874432286b24e9caf98bbc49e0e9fa, type: 3}
-  second: 0
-  minute: 0
-  hour: 0
 --- !u!1 &6409845849811669383
 GameObject:
   m_ObjectHideFlags: 0
